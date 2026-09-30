@@ -1,2 +1,5 @@
-# FinShield-360
-AI-powered financial trust and security platform built on Drunix, combining real-time payment security, credit risk, asset tokenization, cross-border remittances, Zero Trust, continuous monitoring, and GenAI.
+# 🛡️ FinShield 360
+
+### AI-Powered Financial Trust, Security & Intelligence Infrastructure
+
+FinShield 360 is an AI-powered financial security platform built on **Drunix**, designed to provide real-time payment risk analysis, fraud detection, and tamper-resistant transaction recording.
