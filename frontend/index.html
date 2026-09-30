@@ -4,10 +4,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>FinShield 360</title>
 
@@ -22,325 +19,314 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
             background: #f4f7fb;
-            color: #172033;
-            line-height: 1.5;
+            color: #1f2937;
         }
 
         header {
             background: #111827;
             color: white;
-            padding: 25px 6%;
+            padding: 25px 40px;
         }
 
         header h1 {
-            font-size: 30px;
-            margin-bottom: 5px;
+            font-size: 32px;
+            margin-bottom: 8px;
         }
 
         header p {
-            opacity: 0.8;
+            color: #cbd5e1;
+            font-size: 15px;
         }
 
         .container {
-            width: 88%;
+            width: 92%;
             max-width: 1400px;
             margin: 30px auto;
         }
 
-        .card {
+        .architecture {
             background: white;
-            border-radius: 16px;
             padding: 25px;
+            border-radius: 14px;
             margin-bottom: 25px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         }
 
-        .card h2 {
-            margin-bottom: 15px;
+        .architecture h2 {
+            margin-bottom: 18px;
         }
 
-        .card h3 {
-            margin-bottom: 12px;
-        }
-
-        .grid {
+        .architecture-flow {
             display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        .architecture-box {
+            background: #eef2ff;
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .stat-card h3 {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .section {
+            background: white;
+            padding: 28px;
+            border-radius: 14px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .section h2 {
+            margin-bottom: 8px;
+        }
+
+        .section-description {
+            color: #6b7280;
+            margin-bottom: 22px;
         }
 
         .form-grid {
             display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 18px;
         }
 
-        .field {
+        .form-group {
             display: flex;
             flex-direction: column;
         }
 
-        label {
+        .form-group label {
             font-weight: bold;
             margin-bottom: 7px;
-            font-size: 14px;
         }
 
-        input,
-        select {
-            width: 100%;
+        .form-group input,
+        .form-group select {
             padding: 12px;
-            border: 1px solid #d5dbea;
-            border-radius: 9px;
-            font-size: 14px;
-            outline: none;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            background: white;
         }
 
-        input:focus,
-        select:focus {
-            border-color: #2563eb;
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-weight: normal;
         }
 
         button {
+            margin-top: 22px;
+            padding: 13px 24px;
             border: none;
-            border-radius: 9px;
-            padding: 13px 22px;
+            border-radius: 8px;
             background: #2563eb;
             color: white;
             font-size: 15px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 18px;
         }
 
         button:hover {
             opacity: 0.9;
         }
 
-        .secondary-button {
-            background: #374151;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .stat {
-            background: white;
-            padding: 22px;
-            border-radius: 14px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .stat h3 {
-            font-size: 28px;
-            margin-bottom: 5px;
-        }
-
-        .stat p {
-            color: #667085;
-        }
-
         .result {
-            display: none;
             margin-top: 25px;
-            padding: 22px;
-            border-radius: 14px;
+            padding: 20px;
+            border-radius: 10px;
             background: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+
+        .result h3 {
+            margin-bottom: 15px;
         }
 
         .result-grid {
             display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
         }
 
         .result-item {
             background: white;
-            border-radius: 10px;
             padding: 15px;
+            border-radius: 8px;
             border: 1px solid #e5e7eb;
         }
 
-        .result-item small {
+        .result-item span {
             display: block;
-            color: #667085;
-            margin-bottom: 4px;
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 5px;
         }
 
         .result-item strong {
-            font-size: 20px;
+            font-size: 18px;
         }
 
-        .risk-bar-container {
-            width: 100%;
-            height: 18px;
-            background: #e5e7eb;
-            border-radius: 20px;
-            margin: 15px 0;
-            overflow: hidden;
-        }
-
-        .risk-bar {
-            height: 100%;
-            width: 0%;
-            transition: width 0.5s ease;
-            background: #2563eb;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 7px 14px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 13px;
-        }
-
-        .low {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .medium {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .high {
-            background: #ffedd5;
-            color: #9a3412;
-        }
-
-        .critical {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .success {
-            color: #166534;
-        }
-
-        .error {
-            color: #b91c1c;
-        }
-
-        .info {
-            color: #1d4ed8;
-        }
-
-        .factors {
+        .risk-factors {
             margin-top: 18px;
         }
 
-        .factor {
-            display: flex;
-            justify-content: space-between;
-            padding: 9px 0;
-            border-bottom: 1px solid #edf0f5;
+        .risk-factors ul {
+            padding-left: 20px;
+            line-height: 1.8;
         }
 
-        .architecture {
-            display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(160px, 1fr));
-            gap: 12px;
-            align-items: center;
-            text-align: center;
+        .success {
+            border-left: 5px solid #16a34a;
         }
 
-        .architecture-box {
-            background: #f8fafc;
-            border: 1px solid #dce3ee;
-            border-radius: 12px;
-            padding: 18px;
-            font-weight: bold;
+        .warning {
+            border-left: 5px solid #f59e0b;
         }
 
-        .arrow {
-            font-size: 24px;
-            color: #2563eb;
+        .danger {
+            border-left: 5px solid #dc2626;
+        }
+
+        .info {
+            border-left: 5px solid #2563eb;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
-            min-width: 850px;
+            margin-top: 18px;
         }
 
         th,
         td {
             padding: 12px;
-            text-align: left;
             border-bottom: 1px solid #e5e7eb;
-            font-size: 13px;
+            text-align: left;
+            font-size: 14px;
         }
 
         th {
             background: #f8fafc;
         }
 
-        .table-container {
-            overflow-x: auto;
-        }
-
-        .inclusion-result {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 12px;
-            background: #f8fafc;
-            border: 1px solid #e5e7eb;
-        }
-
-        .score-circle {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            border: 8px solid #2563eb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 15px auto;
-            font-size: 25px;
+        .badge {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: bold;
         }
 
-        .footer {
-            text-align: center;
-            color: #667085;
-            padding: 25px;
+        .badge-low {
+            background: #dcfce7;
+            color: #166534;
         }
 
-        @media (max-width: 700px) {
+        .badge-medium {
+            background: #fef3c7;
+            color: #92400e;
+        }
 
-            .container {
-                width: 94%;
+        .badge-high,
+        .badge-critical {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge-approved {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-blocked {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .loading {
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #6b7280;
+        }
+
+        @media (max-width: 900px) {
+
+            .architecture-flow,
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            header h1 {
-                font-size: 24px;
+            .form-grid,
+            .result-grid {
+                grid-template-columns: 1fr;
             }
+        }
 
-            .architecture {
+        @media (max-width: 600px) {
+
+            .architecture-flow,
+            .stats {
                 grid-template-columns: 1fr;
             }
 
-            .arrow {
-                transform: rotate(90deg);
+            header {
+                padding: 20px;
+            }
+
+            .container {
+                width: 95%;
             }
         }
 
     </style>
+
 </head>
 
 <body>
@@ -358,214 +344,169 @@
 
 <div class="container">
 
+
     <!-- =====================================================
-         SYSTEM ARCHITECTURE
+         ARCHITECTURE
     ====================================================== -->
 
-    <section class="card">
+    <div class="architecture">
 
-        <h2>🏗️ Security Architecture</h2>
+        <h2>System Architecture</h2>
 
-        <div class="architecture">
+        <div class="architecture-flow">
 
             <div class="architecture-box">
-                💳 Payment
+                🌐 User
             </div>
 
-            <div class="arrow">→</div>
-
             <div class="architecture-box">
-                ⚙️ FastAPI
+                ⚡ FastAPI
             </div>
 
-            <div class="arrow">→</div>
-
             <div class="architecture-box">
-                🧠 Rule Engine
-                +
-                ML
+                🤖 AI / ML
             </div>
 
-            <div class="arrow">→</div>
-
             <div class="architecture-box">
-                🔐 Security Decision
+                🔐 Security Engine
             </div>
 
-            <div class="arrow">→</div>
-
             <div class="architecture-box">
-                🔗 Drunix Ledger
+                ⛓️ Drunix Ledger
             </div>
 
         </div>
 
-    </section>
+    </div>
 
 
     <!-- =====================================================
          STATISTICS
     ====================================================== -->
 
-    <section class="stats">
+    <div class="stats">
 
-        <div class="stat">
+        <div class="stat-card">
 
-            <h3 id="totalTransactions">
-                0
-            </h3>
+            <h3>Security Engine</h3>
 
-            <p>Total Transactions</p>
+            <p>ACTIVE</p>
 
         </div>
 
-        <div class="stat">
+        <div class="stat-card">
 
-            <h3 id="approvedTransactions">
-                0
-            </h3>
+            <h3>ML Fraud Detection</h3>
 
-            <p>Approved</p>
+            <p>ACTIVE</p>
 
         </div>
 
-        <div class="stat">
+        <div class="stat-card">
 
-            <h3 id="pendingTransactions">
-                0
-            </h3>
+            <h3>Financial Inclusion</h3>
 
-            <p>Pending</p>
+            <p>ACTIVE</p>
 
         </div>
 
-        <div class="stat">
+        <div class="stat-card">
 
-            <h3 id="blockedTransactions">
-                0
-            </h3>
+            <h3>Drunix Ledger</h3>
 
-            <p>Blocked</p>
+            <p>CONNECTED</p>
 
         </div>
 
-    </section>
+    </div>
 
 
     <!-- =====================================================
-         PAYMENT SECURITY
+         REAL-TIME PAYMENT SECURITY
     ====================================================== -->
 
-    <section class="card">
+    <div class="section">
 
-        <h2>💳 Real-Time Payment Security</h2>
+        <h2>⚡ Real-Time Payment Security</h2>
+
+        <p class="section-description">
+            Analyze a payment using rule-based risk scoring,
+            machine-learning fraud detection and Drunix ledger recording.
+        </p>
+
 
         <div class="form-grid">
 
-            <div class="field">
+            <div class="form-group">
 
                 <label>Payment ID</label>
 
                 <input
-                    id="paymentId"
-                    value="DEMO-PAY-001"
+                    id="payment_id"
+                    type="text"
+                    placeholder="PAY-001"
                 >
 
             </div>
 
-            <div class="field">
+
+            <div class="form-group">
 
                 <label>Sender</label>
 
                 <input
                     id="sender"
-                    value="USER001"
+                    type="text"
+                    placeholder="USER001"
                 >
 
             </div>
 
-            <div class="field">
+
+            <div class="form-group">
 
                 <label>Receiver</label>
 
                 <input
                     id="receiver"
-                    value="MERCHANT001"
+                    type="text"
+                    placeholder="MERCHANT001"
                 >
 
             </div>
 
-            <div class="field">
 
-                <label>Amount (INR)</label>
+            <div class="form-group">
+
+                <label>Amount</label>
 
                 <input
                     id="amount"
                     type="number"
-                    value="1000"
+                    placeholder="50000"
                 >
 
             </div>
 
-            <div class="field">
+
+            <div class="form-group">
 
                 <label>Currency</label>
 
                 <select id="currency">
 
-                    <option value="INR">
-                        INR
-                    </option>
+                    <option value="INR">INR</option>
 
-                    <option value="USD">
-                        USD
-                    </option>
+                    <option value="USD">USD</option>
 
-                    <option value="EUR">
-                        EUR
-                    </option>
+                    <option value="EUR">EUR</option>
 
                 </select>
 
             </div>
 
-            <div class="field">
 
-                <label>New Device</label>
-
-                <select id="newDevice">
-
-                    <option value="false">
-                        No
-                    </option>
-
-                    <option value="true">
-                        Yes
-                    </option>
-
-                </select>
-
-            </div>
-
-            <div class="field">
-
-                <label>New Beneficiary</label>
-
-                <select id="newBeneficiary">
-
-                    <option value="false">
-                        No
-                    </option>
-
-                    <option value="true">
-                        Yes
-                    </option>
-
-                </select>
-
-            </div>
-
-            <div class="field">
+            <div class="form-group">
 
                 <label>Transaction Velocity</label>
 
@@ -577,266 +518,108 @@
 
             </div>
 
-            <div class="field">
 
-                <label>Behavior Anomaly</label>
+            <div class="form-group">
+
+                <label>Behavior Anomaly Score</label>
 
                 <input
-                    id="behaviorAnomaly"
+                    id="behavior_anomaly"
                     type="number"
+                    value="0"
                     min="0"
                     max="100"
-                    value="0"
                 >
 
             </div>
 
-            <div class="field">
 
-                <label>Network Risk</label>
+            <div class="form-group">
+
+                <label>Network Risk Score</label>
 
                 <input
-                    id="networkRisk"
+                    id="network_risk"
                     type="number"
+                    value="0"
                     min="0"
                     max="100"
-                    value="0"
                 >
 
             </div>
 
         </div>
 
+
+        <div class="checkbox-group">
+
+            <label>
+
+                <input
+                    type="checkbox"
+                    id="new_device"
+                >
+
+                New Device
+
+            </label>
+
+
+            <label>
+
+                <input
+                    type="checkbox"
+                    id="new_beneficiary"
+                >
+
+                New Beneficiary
+
+            </label>
+
+        </div>
+
+
         <button onclick="processPayment()">
-            🔍 Analyze & Process Payment
+
+            Analyze Payment
+
         </button>
 
 
         <div
             id="paymentResult"
             class="result"
-        >
+            style="display:none;"
+        ></div>
 
-            <h2>
-                Security Analysis
-            </h2>
-
-            <p>
-                Final Risk:
-                <span
-                    id="riskBadge"
-                    class="badge"
-                >
-                    -
-                </span>
-            </p>
-
-            <div class="risk-bar-container">
-
-                <div
-                    id="riskBar"
-                    class="risk-bar"
-                ></div>
-
-            </div>
-
-            <div class="result-grid">
-
-                <div class="result-item">
-
-                    <small>
-                        Rule Engine
-                    </small>
-
-                    <strong id="ruleScore">
-                        -
-                    </strong>
-
-                </div>
-
-                <div class="result-item">
-
-                    <small>
-                        ML Fraud Score
-                    </small>
-
-                    <strong id="mlScore">
-                        -
-                    </strong>
-
-                </div>
-
-                <div class="result-item">
-
-                    <small>
-                        Combined Score
-                    </small>
-
-                    <strong id="combinedScore">
-                        -
-                    </strong>
-
-                </div>
-
-                <div class="result-item">
-
-                    <small>
-                        Decision Score
-                    </small>
-
-                    <strong id="decisionScore">
-                        -
-                    </strong>
-
-                </div>
-
-                <div class="result-item">
-
-                    <small>
-                        Decision
-                    </small>
-
-                    <strong id="decision">
-                        -
-                    </strong>
-
-                </div>
-
-                <div class="result-item">
-
-                    <small>
-                        Status
-                    </small>
-
-                    <strong id="status">
-                        -
-                    </strong>
-
-                </div>
-
-                <div class="result-item">
-
-                    <small>
-                        ML Prediction
-                    </small>
-
-                    <strong id="prediction">
-                        -
-                    </strong>
-
-                </div>
-
-                <div class="result-item">
-
-                    <small>
-                        Drunix
-                    </small>
-
-                    <strong id="drunixStatus">
-                        -
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="factors">
-
-                <h3>
-                    Risk Factors
-                </h3>
-
-                <div id="riskFactors">
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
+    </div>
 
 
     <!-- =====================================================
          FINANCIAL INCLUSION
     ====================================================== -->
 
-    <section class="card">
+    <div class="section">
 
-        <h2>
-            🤝 Financial Inclusion Assessment
-        </h2>
+        <h2>🤝 Financial Inclusion Assessment</h2>
 
-        <p style="margin-bottom:20px;color:#667085;">
+        <p class="section-description">
 
-            Assess financial access using alternative financial
-            activity indicators for users with limited traditional
-            financial history.
+            Assess financial activity using transaction consistency,
+            payment regularity, account activity, savings behavior,
+            successful transactions and account history.
 
         </p>
 
 
         <div class="form-grid">
 
-            <div class="field">
+            <div class="form-group">
 
-                <label>
-                    Transaction Consistency
-                </label>
+                <label>Transaction Consistency (0–100)</label>
 
                 <input
-                    id="fiConsistency"
-                    type="number"
-                    min="0"
-                    max="100"
-                    value="90"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Payment Regularity
-                </label>
-
-                <input
-                    id="fiRegularity"
-                    type="number"
-                    min="0"
-                    max="100"
-                    value="90"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Account Activity
-                </label>
-
-                <input
-                    id="fiActivity"
-                    type="number"
-                    min="0"
-                    max="100"
-                    value="80"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Savings Behavior
-                </label>
-
-                <input
-                    id="fiSavings"
+                    id="transaction_consistency"
                     type="number"
                     min="0"
                     max="100"
@@ -846,31 +629,72 @@
             </div>
 
 
-            <div class="field">
+            <div class="form-group">
 
-                <label>
-                    Successful Transactions
-                </label>
+                <label>Payment Regularity (0–100)</label>
 
                 <input
-                    id="fiSuccessful"
+                    id="payment_regularity"
                     type="number"
                     min="0"
                     max="100"
-                    value="95"
+                    value="70"
                 >
 
             </div>
 
 
-            <div class="field">
+            <div class="form-group">
 
-                <label>
-                    Account Age (Months)
-                </label>
+                <label>Account Activity (0–100)</label>
 
                 <input
-                    id="fiAge"
+                    id="account_activity"
+                    type="number"
+                    min="0"
+                    max="100"
+                    value="60"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Savings Behavior (0–100)</label>
+
+                <input
+                    id="savings_behavior"
+                    type="number"
+                    min="0"
+                    max="100"
+                    value="50"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Successful Transactions (0–100)</label>
+
+                <input
+                    id="successful_transactions"
+                    type="number"
+                    min="0"
+                    max="100"
+                    value="80"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Account Age (Months)</label>
+
+                <input
+                    id="account_age_months"
                     type="number"
                     min="0"
                     value="24"
@@ -883,269 +707,302 @@
 
         <button onclick="assessFinancialInclusion()">
 
-            🤝 Assess Financial Inclusion
+            Assess Financial Inclusion
 
         </button>
 
 
         <div
-            id="financialInclusionResult"
-            class="inclusion-result"
-        >
+            id="inclusionResult"
+            class="result"
+            style="display:none;"
+        ></div>
 
-            <h3>
-                Financial Inclusion Result
-            </h3>
-
-
-            <div class="score-circle">
-
-                <span id="fiScore">
-                    -
-                </span>
-
-            </div>
-
-
-            <div class="result-grid">
-
-                <div class="result-item">
-
-                    <small>
-                        Category
-                    </small>
-
-                    <strong id="fiCategory">
-                        -
-                    </strong>
-
-                </div>
-
-
-                <div class="result-item">
-
-                    <small>
-                        Recommendation
-                    </small>
-
-                    <strong id="fiRecommendation">
-                        -
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="factors">
-
-                <h3>
-                    Assessment Factors
-                </h3>
-
-                <div id="fiFactors">
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
+    </div>
 
 
     <!-- =====================================================
-         TRANSACTION HISTORY
+         CROSS-BORDER REMITTANCE
     ====================================================== -->
 
-    <section class="card">
+    <div class="section">
 
-        <h2>
-            🔗 Drunix Transaction History
-        </h2>
+        <h2>🌍 Cross-Border Remittance</h2>
 
-        <button
-            class="secondary-button"
-            onclick="loadHistory()"
-        >
-            🔄 Refresh History
-        </button>
+        <p class="section-description">
 
-        <div class="table-container">
+            Assess international money transfers with currency
+            conversion, transfer fees and risk-based remittance decisions.
 
-            <table>
+        </p>
 
-                <thead>
 
-                    <tr>
+        <div class="form-grid">
 
-                        <th>
-                            Payment ID
-                        </th>
 
-                        <th>
-                            Sender
-                        </th>
+            <div class="form-group">
 
-                        <th>
-                            Receiver
-                        </th>
+                <label>Sender Country</label>
 
-                        <th>
-                            Amount
-                        </th>
+                <select id="sender_country">
 
-                        <th>
-                            Risk Score
-                        </th>
+                    <option value="India">India</option>
 
-                        <th>
-                            Risk Level
-                        </th>
+                    <option value="USA">USA</option>
 
-                        <th>
-                            Decision
-                        </th>
+                    <option value="UK">UK</option>
 
-                        <th>
-                            Status
-                        </th>
+                    <option value="UAE">UAE</option>
 
-                    </tr>
+                    <option value="Singapore">Singapore</option>
 
-                </thead>
+                    <option value="Canada">Canada</option>
 
-                <tbody id="transactionTable">
+                </select>
 
-                </tbody>
+            </div>
 
-            </table>
+
+            <div class="form-group">
+
+                <label>Receiver Country</label>
+
+                <select id="receiver_country">
+
+                    <option value="USA">USA</option>
+
+                    <option value="India">India</option>
+
+                    <option value="UK">UK</option>
+
+                    <option value="UAE">UAE</option>
+
+                    <option value="Singapore">Singapore</option>
+
+                    <option value="Canada">Canada</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Amount</label>
+
+                <input
+                    id="remittance_amount"
+                    type="number"
+                    placeholder="50000"
+                    min="0"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Exchange Rate</label>
+
+                <input
+                    id="exchange_rate"
+                    type="number"
+                    step="0.000001"
+                    placeholder="0.012"
+                    min="0"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Transfer Fee</label>
+
+                <input
+                    id="transfer_fee"
+                    type="number"
+                    step="0.01"
+                    placeholder="5"
+                    min="0"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Transfer Purpose</label>
+
+                <select id="remittance_purpose">
+
+                    <option value="Education">
+                        Education
+                    </option>
+
+                    <option value="Family Support">
+                        Family Support
+                    </option>
+
+                    <option value="Medical">
+                        Medical
+                    </option>
+
+                    <option value="Business">
+                        Business
+                    </option>
+
+                    <option value="Personal">
+                        Personal
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Risk Score (0–100)</label>
+
+                <input
+                    id="remittance_risk_score"
+                    type="number"
+                    min="0"
+                    max="100"
+                    value="15"
+                >
+
+            </div>
 
         </div>
 
-    </section>
+
+        <button onclick="processRemittance()">
+
+            Process Remittance
+
+        </button>
+
+
+        <div
+            id="remittanceResult"
+            class="result"
+            style="display:none;"
+        ></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PAYMENT HISTORY
+    ====================================================== -->
+
+    <div class="section">
+
+        <h2>📊 Payment History</h2>
+
+        <p class="section-description">
+
+            Payments recorded on the FinShield 360 Drunix ledger.
+
+        </p>
+
+
+        <button onclick="loadHistory()">
+
+            Refresh History
+
+        </button>
+
+
+        <div id="historyContainer">
+
+            <p class="loading">
+                Loading payment history...
+            </p>
+
+        </div>
+
+    </div>
+
 
 </div>
 
 
-<div class="footer">
+<footer>
 
-    FinShield 360 —
-    AI + ML + Drunix + Financial Inclusion
+    FinShield 360 © 2026 |
+    AI-Powered Financial Trust, Security & Intelligence Infrastructure
 
-</div>
+</footer>
 
 
 <script>
 
-/* =====================================================
-   API CONFIGURATION
-===================================================== */
-
-const API_BASE =
-    "http://127.0.0.1:8000";
+    const API_BASE = "http://127.0.0.1:8000";
 
 
-/* =====================================================
-   HELPER
-===================================================== */
+    // =========================================================
+    // PAYMENT SECURITY
+    // =========================================================
 
-function getRiskClass(level) {
+    async function processPayment() {
 
-    if (!level) {
-        return "";
-    }
+        const resultBox =
+            document.getElementById("paymentResult");
 
-    return level
-        .toString()
-        .toLowerCase();
+        resultBox.style.display = "block";
 
-}
+        resultBox.innerHTML =
+            '<p class="loading">Analyzing payment...</p>';
 
 
-/* =====================================================
-   PAYMENT PROCESSING
-===================================================== */
+        const data = {
 
-async function processPayment() {
+            payment_id:
+                document.getElementById("payment_id").value,
 
-    const resultBox =
-        document.getElementById(
-            "paymentResult"
-        );
+            sender:
+                document.getElementById("sender").value,
 
-    resultBox.style.display = "block";
+            receiver:
+                document.getElementById("receiver").value,
 
-    resultBox.innerHTML =
-        "<h2>Security Analysis</h2>" +
-        "<p>Processing payment...</p>";
+            amount:
+                Number(document.getElementById("amount").value),
 
+            currency:
+                document.getElementById("currency").value,
 
-    const data = {
+            new_device:
+                document.getElementById("new_device").checked,
 
-        payment_id:
-            document.getElementById(
-                "paymentId"
-            ).value,
+            new_beneficiary:
+                document.getElementById("new_beneficiary").checked,
 
-        sender:
-            document.getElementById(
-                "sender"
-            ).value,
+            velocity:
+                Number(document.getElementById("velocity").value),
 
-        receiver:
-            document.getElementById(
-                "receiver"
-            ).value,
+            behavior_anomaly:
+                Number(
+                    document.getElementById(
+                        "behavior_anomaly"
+                    ).value
+                ),
 
-        amount:
-            Number(
-                document.getElementById(
-                    "amount"
-                ).value
-            ),
-
-        currency:
-            document.getElementById(
-                "currency"
-            ).value,
-
-        new_device:
-            document.getElementById(
-                "newDevice"
-            ).value === "true",
-
-        new_beneficiary:
-            document.getElementById(
-                "newBeneficiary"
-            ).value === "true",
-
-        velocity:
-            Number(
-                document.getElementById(
-                    "velocity"
-                ).value
-            ),
-
-        behavior_anomaly:
-            Number(
-                document.getElementById(
-                    "behaviorAnomaly"
-                ).value
-            ),
-
-        network_risk:
-            Number(
-                document.getElementById(
-                    "networkRisk"
-                ).value
-            )
-    };
+            network_risk:
+                Number(
+                    document.getElementById(
+                        "network_risk"
+                    ).value
+                )
+        };
 
 
-    try {
+        try {
 
-        const response =
-            await fetch(
+            const response = await fetch(
                 `${API_BASE}/payment`,
                 {
                     method: "POST",
@@ -1155,377 +1012,236 @@ async function processPayment() {
                             "application/json"
                     },
 
-                    body:
-                        JSON.stringify(data)
+                    body: JSON.stringify(data)
                 }
             );
 
 
-        const result =
-            await response.json();
+            const result = await response.json();
 
 
-        if (!response.ok) {
+            if (!response.ok) {
 
-            throw new Error(
-                result.detail
-                    ? JSON.stringify(
-                        result.detail
-                    )
-                    : "Payment processing failed"
-            );
+                throw new Error(
+                    result.detail ||
+                    "Payment processing failed"
+                );
+            }
 
-        }
 
+            const finalRisk =
+                result.final_risk;
 
-        displayPaymentResult(result);
 
-        await loadHistory();
+            let resultClass = "success";
 
-    }
 
-    catch (error) {
+            if (
+                finalRisk.level === "MEDIUM" ||
+                finalRisk.level === "HIGH"
+            ) {
 
-        resultBox.innerHTML = `
+                resultClass = "warning";
 
-            <h2>Security Analysis</h2>
+            }
 
-            <p class="error">
-                ❌ ${error.message}
-            </p>
 
-        `;
+            if (
+                finalRisk.level === "CRITICAL"
+            ) {
 
-        console.error(error);
+                resultClass = "danger";
 
-    }
+            }
 
-}
 
+            resultBox.className =
+                `result ${resultClass}`;
 
-/* =====================================================
-   DISPLAY PAYMENT RESULT
-===================================================== */
 
-function displayPaymentResult(result) {
+            resultBox.innerHTML = `
 
-    const resultBox =
-        document.getElementById(
-            "paymentResult"
-        );
+                <h3>Payment Security Result</h3>
 
-    resultBox.style.display = "block";
+                <div class="result-grid">
 
+                    <div class="result-item">
 
-    const finalRisk =
-        result.final_risk || {};
+                        <span>Risk Score</span>
 
-    const rule =
-        result.rule_engine || {};
+                        <strong>
+                            ${finalRisk.score}/100
+                        </strong>
 
-    const ml =
-        result.ml_fraud_detection || {};
+                    </div>
 
-    const combined =
-        result.combined_score || {};
+                    <div class="result-item">
 
-    const drunix =
-        result.drunix || {};
+                        <span>Risk Level</span>
 
+                        <strong>
+                            ${finalRisk.level}
+                        </strong>
 
-    const score =
-        Number(
-            finalRisk.score || 0
-        );
+                    </div>
 
+                    <div class="result-item">
 
-    const level =
-        finalRisk.level || "UNKNOWN";
+                        <span>Decision</span>
 
+                        <strong>
+                            ${finalRisk.decision}
+                        </strong>
 
-    const riskClass =
-        getRiskClass(level);
+                    </div>
 
+                    <div class="result-item">
 
-    resultBox.innerHTML = `
+                        <span>Status</span>
 
-        <h2>
-            Security Analysis
-        </h2>
+                        <strong>
+                            ${finalRisk.status}
+                        </strong>
 
-        <p>
+                    </div>
 
-            Final Risk:
+                    <div class="result-item">
 
-            <span
-                id="riskBadge"
-                class="badge ${riskClass}"
-            >
-                ${level}
-            </span>
+                        <span>ML Fraud Score</span>
 
-        </p>
+                        <strong>
+                            ${result.ml_fraud_detection.fraud_score}
+                        </strong>
 
+                    </div>
 
-        <div class="risk-bar-container">
+                    <div class="result-item">
 
-            <div
-                id="riskBar"
-                class="risk-bar"
-                style="width:${score}%"
-            ></div>
+                        <span>Drunix</span>
 
-        </div>
+                        <strong>
+                            ${result.drunix.recorded
+                                ? "RECORDED"
+                                : "FAILED"}
+                        </strong>
 
+                    </div>
 
-        <div class="result-grid">
+                </div>
 
-            <div class="result-item">
 
-                <small>
-                    Rule Engine
-                </small>
+                <div class="risk-factors">
 
-                <strong>
-                    ${rule.score ?? "-"}
-                </strong>
+                    <h3>Risk Factors</h3>
 
-            </div>
+                    <ul>
 
+                        ${Object.entries(
+                            result.rule_engine.factors
+                        )
+                        .map(
+                            ([key, value]) =>
+                                `<li>
+                                    ${key}: ${value}
+                                </li>`
+                        )
+                        .join("")}
 
-            <div class="result-item">
-
-                <small>
-                    ML Fraud Score
-                </small>
-
-                <strong>
-                    ${ml.fraud_score ?? "-"}
-                </strong>
-
-            </div>
-
-
-            <div class="result-item">
-
-                <small>
-                    Combined Score
-                </small>
-
-                <strong>
-                    ${combined.score ?? "-"}
-                </strong>
-
-            </div>
-
-
-            <div class="result-item">
-
-                <small>
-                    Decision Score
-                </small>
-
-                <strong>
-                    ${score}
-                </strong>
-
-            </div>
-
-
-            <div class="result-item">
-
-                <small>
-                    Decision
-                </small>
-
-                <strong>
-                    ${finalRisk.decision ?? "-"}
-                </strong>
-
-            </div>
-
-
-            <div class="result-item">
-
-                <small>
-                    Status
-                </small>
-
-                <strong>
-                    ${finalRisk.status ?? "-"}
-                </strong>
-
-            </div>
-
-
-            <div class="result-item">
-
-                <small>
-                    ML Prediction
-                </small>
-
-                <strong>
-                    ${ml.prediction ?? "-"}
-                </strong>
-
-            </div>
-
-
-            <div class="result-item">
-
-                <small>
-                    Drunix
-                </small>
-
-                <strong class="success">
-                    ${drunix.recorded
-                        ? "RECORDED"
-                        : "NOT RECORDED"}
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <div class="factors">
-
-            <h3>
-                Risk Factors
-            </h3>
-
-            <div id="riskFactors">
-
-                ${formatFactors(
-                    rule.factors || {}
-                )}
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =====================================================
-   FORMAT RISK FACTORS
-===================================================== */
-
-function formatFactors(factors) {
-
-    let html = "";
-
-
-    Object.entries(factors).forEach(
-        ([key, value]) => {
-
-            const name =
-                key
-                    .replaceAll("_", " ")
-                    .replace(
-                        /\b\w/g,
-                        letter =>
-                            letter.toUpperCase()
-                    );
-
-
-            html += `
-
-                <div class="factor">
-
-                    <span>
-                        ${name}
-                    </span>
-
-                    <strong>
-                        ${value}
-                    </strong>
+                    </ul>
 
                 </div>
 
             `;
 
+
+            loadHistory();
+
         }
-    );
+
+        catch (error) {
+
+            resultBox.className =
+                "result danger";
+
+            resultBox.innerHTML = `
+
+                <h3>Payment Error</h3>
+
+                <p>
+                    ${error.message}
+                </p>
+
+            `;
+        }
+    }
 
 
-    return html;
+    // =========================================================
+    // FINANCIAL INCLUSION
+    // =========================================================
 
-}
+    async function assessFinancialInclusion() {
 
+        const resultBox =
+            document.getElementById(
+                "inclusionResult"
+            );
 
-/* =====================================================
-   FINANCIAL INCLUSION
-===================================================== */
+        resultBox.style.display = "block";
 
-async function assessFinancialInclusion() {
-
-    const resultBox =
-        document.getElementById(
-            "financialInclusionResult"
-        );
-
-    resultBox.style.display = "block";
+        resultBox.innerHTML =
+            '<p class="loading">Calculating inclusion score...</p>';
 
 
-    document.getElementById(
-        "fiScore"
-    ).innerText = "...";
+        const data = {
+
+            transaction_consistency:
+                Number(
+                    document.getElementById(
+                        "transaction_consistency"
+                    ).value
+                ),
+
+            payment_regularity:
+                Number(
+                    document.getElementById(
+                        "payment_regularity"
+                    ).value
+                ),
+
+            account_activity:
+                Number(
+                    document.getElementById(
+                        "account_activity"
+                    ).value
+                ),
+
+            savings_behavior:
+                Number(
+                    document.getElementById(
+                        "savings_behavior"
+                    ).value
+                ),
+
+            successful_transactions:
+                Number(
+                    document.getElementById(
+                        "successful_transactions"
+                    ).value
+                ),
+
+            account_age_months:
+                Number(
+                    document.getElementById(
+                        "account_age_months"
+                    ).value
+                )
+        };
 
 
-    const data = {
+        try {
 
-        transaction_consistency:
-            Number(
-                document.getElementById(
-                    "fiConsistency"
-                ).value
-            ),
-
-        payment_regularity:
-            Number(
-                document.getElementById(
-                    "fiRegularity"
-                ).value
-            ),
-
-        account_activity:
-            Number(
-                document.getElementById(
-                    "fiActivity"
-                ).value
-            ),
-
-        savings_behavior:
-            Number(
-                document.getElementById(
-                    "fiSavings"
-                ).value
-            ),
-
-        successful_transactions:
-            Number(
-                document.getElementById(
-                    "fiSuccessful"
-                ).value
-            ),
-
-        account_age_months:
-            Number(
-                document.getElementById(
-                    "fiAge"
-                ).value
-            )
-
-    };
-
-
-    try {
-
-        const response =
-            await fetch(
+            const response = await fetch(
                 `${API_BASE}/financial-inclusion`,
                 {
                     method: "POST",
@@ -1535,333 +1251,651 @@ async function assessFinancialInclusion() {
                             "application/json"
                     },
 
-                    body:
-                        JSON.stringify(data)
+                    body: JSON.stringify(data)
                 }
             );
 
 
-        const result =
-            await response.json();
+            const result = await response.json();
 
 
-        if (!response.ok) {
+            if (!response.ok) {
 
-            throw new Error(
-                result.detail
-                    ? JSON.stringify(
-                        result.detail
-                    )
-                    : "Financial inclusion assessment failed"
-            );
+                throw new Error(
+                    result.detail ||
+                    "Assessment failed"
+                );
+            }
+
+
+            const assessment =
+                result.assessment;
+
+
+            let resultClass = "success";
+
+
+            if (
+                assessment.category ===
+                "REVIEW"
+            ) {
+
+                resultClass = "warning";
+
+            }
+
+
+            if (
+                assessment.category ===
+                "LIMITED"
+            ) {
+
+                resultClass = "danger";
+
+            }
+
+
+            resultBox.className =
+                `result ${resultClass}`;
+
+
+            resultBox.innerHTML = `
+
+                <h3>
+                    Financial Inclusion Result
+                </h3>
+
+                <div class="result-grid">
+
+                    <div class="result-item">
+
+                        <span>Inclusion Score</span>
+
+                        <strong>
+                            ${assessment.inclusionScore}/100
+                        </strong>
+
+                    </div>
+
+                    <div class="result-item">
+
+                        <span>Category</span>
+
+                        <strong>
+                            ${assessment.category}
+                        </strong>
+
+                    </div>
+
+                    <div class="result-item">
+
+                        <span>Recommendation</span>
+
+                        <strong>
+                            ${assessment.recommendation}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="risk-factors">
+
+                    <h3>Assessment Factors</h3>
+
+                    <ul>
+
+                        ${Object.entries(
+                            assessment.factors
+                        )
+                        .map(
+                            ([key, value]) =>
+                                `<li>
+                                    ${key}: ${value}
+                                </li>`
+                        )
+                        .join("")}
+
+                    </ul>
+
+                </div>
+
+            `;
 
         }
 
+        catch (error) {
 
-        const assessment =
-            result.assessment || {};
+            resultBox.className =
+                "result danger";
 
+            resultBox.innerHTML = `
 
-        document.getElementById(
-            "fiScore"
-        ).innerText =
-            assessment.inclusionScore ??
-            "-";
+                <h3>
+                    Assessment Error
+                </h3>
 
+                <p>
+                    ${error.message}
+                </p>
 
-        document.getElementById(
-            "fiCategory"
-        ).innerText =
-            assessment.category ??
-            "-";
-
-
-        document.getElementById(
-            "fiRecommendation"
-        ).innerText =
-            assessment.recommendation ??
-            "-";
+            `;
+        }
+    }
 
 
-        document.getElementById(
-            "fiFactors"
-        ).innerHTML =
-            formatFactors(
-                assessment.factors || {}
+    // =========================================================
+    // CROSS-BORDER REMITTANCE
+    // =========================================================
+
+    async function processRemittance() {
+
+        const resultBox =
+            document.getElementById(
+                "remittanceResult"
             );
 
+        resultBox.style.display = "block";
+
+        resultBox.innerHTML =
+            '<p class="loading">Processing international remittance...</p>';
+
+
+        const data = {
+
+            sender_country:
+                document.getElementById(
+                    "sender_country"
+                ).value,
+
+            receiver_country:
+                document.getElementById(
+                    "receiver_country"
+                ).value,
+
+            amount:
+                Number(
+                    document.getElementById(
+                        "remittance_amount"
+                    ).value
+                ),
+
+            exchange_rate:
+                Number(
+                    document.getElementById(
+                        "exchange_rate"
+                    ).value
+                ),
+
+            transfer_fee:
+                Number(
+                    document.getElementById(
+                        "transfer_fee"
+                    ).value
+                ),
+
+            purpose:
+                document.getElementById(
+                    "remittance_purpose"
+                ).value,
+
+            risk_score:
+                Number(
+                    document.getElementById(
+                        "remittance_risk_score"
+                    ).value
+                )
+        };
+
+
+        try {
+
+            const response = await fetch(
+                `${API_BASE}/remittance`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify(data)
+                }
+            );
+
+
+            const result = await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    result.detail ||
+                    "Remittance processing failed"
+                );
+            }
+
+
+            const remittance =
+                result.remittance;
+
+
+            let resultClass = "success";
+
+
+            if (
+                remittance.riskLevel ===
+                "MEDIUM" ||
+                remittance.riskLevel ===
+                "HIGH"
+            ) {
+
+                resultClass = "warning";
+
+            }
+
+
+            if (
+                remittance.riskLevel ===
+                "CRITICAL"
+            ) {
+
+                resultClass = "danger";
+
+            }
+
+
+            resultBox.className =
+                `result ${resultClass}`;
+
+
+            resultBox.innerHTML = `
+
+                <h3>
+                    Cross-Border Remittance Result
+                </h3>
+
+                <div class="result-grid">
+
+                    <div class="result-item">
+
+                        <span>Route</span>
+
+                        <strong>
+                            ${remittance.senderCountry}
+                            →
+                            ${remittance.receiverCountry}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-item">
+
+                        <span>Original Amount</span>
+
+                        <strong>
+                            ${remittance.amount}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-item">
+
+                        <span>Exchange Rate</span>
+
+                        <strong>
+                            ${remittance.exchangeRate}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-item">
+
+                        <span>Converted Amount</span>
+
+                        <strong>
+                            ${remittance.convertedAmount}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-item">
+
+                        <span>Transfer Fee</span>
+
+                        <strong>
+                            ${remittance.transferFee}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-item">
+
+                        <span>Final Amount</span>
+
+                        <strong>
+                            ${remittance.finalAmount}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-item">
+
+                        <span>Risk Score</span>
+
+                        <strong>
+                            ${remittance.riskScore}/100
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-item">
+
+                        <span>Risk Level</span>
+
+                        <strong>
+                            ${remittance.riskLevel}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-item">
+
+                        <span>Decision</span>
+
+                        <strong>
+                            ${remittance.decision}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-item">
+
+                        <span>Status</span>
+
+                        <strong>
+                            ${remittance.status}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-item">
+
+                        <span>Purpose</span>
+
+                        <strong>
+                            ${remittance.purpose}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+        catch (error) {
+
+            resultBox.className =
+                "result danger";
+
+            resultBox.innerHTML = `
+
+                <h3>
+                    Remittance Error
+                </h3>
+
+                <p>
+                    ${error.message}
+                </p>
+
+            `;
+        }
     }
 
-    catch (error) {
 
-        document.getElementById(
-            "fiScore"
-        ).innerText = "ERROR";
+    // =========================================================
+    // PAYMENT HISTORY
+    // =========================================================
 
+    async function loadHistory() {
 
-        document.getElementById(
-            "fiCategory"
-        ).innerText = "-";
-
-
-        document.getElementById(
-            "fiRecommendation"
-        ).innerText = "-";
+        const container =
+            document.getElementById(
+                "historyContainer"
+            );
 
 
-        document.getElementById(
-            "fiFactors"
-        ).innerHTML = `
-
-            <p class="error">
-                ❌ ${error.message}
-            </p>
-
-        `;
-
-        console.error(error);
-
-    }
-
-}
+        container.innerHTML =
+            '<p class="loading">Loading payment history...</p>';
 
 
-/* =====================================================
-   LOAD DRUNIX HISTORY
-===================================================== */
+        try {
 
-async function loadHistory() {
-
-    const table =
-        document.getElementById(
-            "transactionTable"
-        );
-
-
-    table.innerHTML = `
-
-        <tr>
-
-            <td colspan="8">
-                Loading transactions...
-            </td>
-
-        </tr>
-
-    `;
-
-
-    try {
-
-        const response =
-            await fetch(
+            const response = await fetch(
                 `${API_BASE}/payments`
             );
 
 
-        const payments =
-            await response.json();
+            const result =
+                await response.json();
 
 
-        if (!response.ok) {
+            if (!response.ok) {
 
-            throw new Error(
-                "Unable to load payment history"
-            );
+                throw new Error(
+                    result.detail ||
+                    "Unable to load history"
+                );
+            }
 
-        }
+
+            const payments =
+                result.payments || [];
 
 
-        if (
-            !Array.isArray(payments) ||
-            payments.length === 0
-        ) {
+            if (payments.length === 0) {
 
-            table.innerHTML = `
+                container.innerHTML =
+                    "<p>No payments recorded yet.</p>";
 
-                <tr>
+                return;
+            }
 
-                    <td colspan="8">
-                        No transactions recorded yet.
-                    </td>
 
-                </tr>
+            let html = `
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Payment ID</th>
+
+                            <th>Sender</th>
+
+                            <th>Receiver</th>
+
+                            <th>Amount</th>
+
+                            <th>Risk Score</th>
+
+                            <th>Risk Level</th>
+
+                            <th>Decision</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
 
             `;
 
-            updateStatistics([]);
 
-            return;
-
-        }
-
-
-        table.innerHTML = "";
-
-
-        payments.forEach(
-            payment => {
-
-                const row =
-                    document.createElement(
-                        "tr"
-                    );
-
+            payments.forEach(payment => {
 
                 const level =
-                    payment.riskLevel ||
-                    "-";
+                    String(
+                        payment.riskLevel || ""
+                    ).toLowerCase();
 
 
-                const riskClass =
-                    getRiskClass(level);
+                let statusClass =
+                    "badge-pending";
 
 
-                row.innerHTML = `
+                const status =
+                    String(
+                        payment.status || ""
+                    ).toLowerCase();
 
-                    <td>
-                        ${payment.paymentId || "-"}
-                    </td>
 
-                    <td>
-                        ${payment.sender || "-"}
-                    </td>
+                if (
+                    status === "completed"
+                ) {
 
-                    <td>
-                        ${payment.receiver || "-"}
-                    </td>
+                    statusClass =
+                        "badge-approved";
 
-                    <td>
-                        ${payment.amount ?? "-"}
-                        ${payment.currency || ""}
-                    </td>
+                }
 
-                    <td>
-                        ${payment.riskScore ?? "-"}
-                    </td>
 
-                    <td>
+                if (
+                    status === "blocked"
+                ) {
 
-                        <span
-                            class="badge ${riskClass}"
-                        >
-                            ${level}
-                        </span>
+                    statusClass =
+                        "badge-blocked";
 
-                    </td>
+                }
 
-                    <td>
-                        ${payment.decision || "-"}
-                    </td>
 
-                    <td>
-                        ${payment.status || "-"}
-                    </td>
+                html += `
+
+                    <tr>
+
+                        <td>
+                            ${payment.paymentId || "-"}
+                        </td>
+
+                        <td>
+                            ${payment.sender || "-"}
+                        </td>
+
+                        <td>
+                            ${payment.receiver || "-"}
+                        </td>
+
+                        <td>
+                            ${payment.amount || "-"}
+                            ${payment.currency || ""}
+                        </td>
+
+                        <td>
+                            ${payment.riskScore ?? "-"}
+                        </td>
+
+                        <td>
+
+                            <span
+                                class="badge badge-${level}"
+                            >
+
+                                ${payment.riskLevel || "-"}
+
+                            </span>
+
+                        </td>
+
+                        <td>
+                            ${payment.decision || "-"}
+                        </td>
+
+                        <td>
+
+                            <span
+                                class="badge ${statusClass}"
+                            >
+
+                                ${payment.status || "-"}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
 
                 `;
 
-
-                table.appendChild(row);
-
-            }
-        );
+            });
 
 
-        updateStatistics(payments);
+            html += `
 
+                    </tbody>
+
+                </table>
+
+            `;
+
+
+            container.innerHTML = html;
+
+        }
+
+        catch (error) {
+
+            container.innerHTML = `
+
+                <div class="result danger">
+
+                    <h3>
+                        History Error
+                    </h3>
+
+                    <p>
+                        ${error.message}
+                    </p>
+
+                </div>
+
+            `;
+        }
     }
 
-    catch (error) {
 
-        table.innerHTML = `
+    // =========================================================
+    // INITIAL LOAD
+    // =========================================================
 
-            <tr>
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
 
-                <td
-                    colspan="8"
-                    class="error"
-                >
-                    ❌ ${error.message}
-                </td>
+            loadHistory();
 
-            </tr>
-
-        `;
-
-        console.error(error);
-
-    }
-
-}
-
-
-/* =====================================================
-   STATISTICS
-===================================================== */
-
-function updateStatistics(payments) {
-
-    const total =
-        payments.length;
-
-
-    const approved =
-        payments.filter(
-            p =>
-                p.status === "COMPLETED"
-        ).length;
-
-
-    const pending =
-        payments.filter(
-            p =>
-                p.status === "PENDING"
-        ).length;
-
-
-    const blocked =
-        payments.filter(
-            p =>
-                p.status === "BLOCKED"
-        ).length;
-
-
-    document.getElementById(
-        "totalTransactions"
-    ).innerText = total;
-
-
-    document.getElementById(
-        "approvedTransactions"
-    ).innerText = approved;
-
-
-    document.getElementById(
-        "pendingTransactions"
-    ).innerText = pending;
-
-
-    document.getElementById(
-        "blockedTransactions"
-    ).innerText = blocked;
-
-}
-
-
-/* =====================================================
-   LOAD DASHBOARD
-===================================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        loadHistory();
-
-    }
-);
+        }
+    );
 
 </script>
+
 
 </body>
 
