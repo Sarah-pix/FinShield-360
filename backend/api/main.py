@@ -1,188 +1,209 @@
+import json
+import os
+import sys
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
-from ai.risk_engine.risk_engine import calculate_risk
-from ai.fraud_detection.fraud_detector import predict_fraud
-from backend.drunix_client.drunix_client import (
-    create_payment,
-    get_all_payments
+# ---------------------------------------------------------
+# Project path
+# ---------------------------------------------------------
+
+BASE_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "../..")
 )
 
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
 
-# ============================================================
-# FINSHIELD 360 API
-# ============================================================
+# ---------------------------------------------------------
+# FinShield modules
+# ---------------------------------------------------------
+
+from ai.risk_engine.risk_engine import calculate_risk
+from ai.financial_inclusion.inclusion_engine import calculate_inclusion_score
+from ai.fraud_detection.fraud_detector import predict_fraud
+
+from backend.drunix_client.drunix_client import (
+    create_payment,
+    get_all_payments,
+)
+
+# ---------------------------------------------------------
+# FastAPI
+# ---------------------------------------------------------
 
 app = FastAPI(
     title="FinShield 360 API",
-    description="AI-Powered Financial Trust, Security & Intelligence Infrastructure",
-    version="1.0.0"
+    description=(
+        "AI-powered financial security, fraud detection, "
+        "real-time payment risk analysis and financial inclusion API"
+    ),
+    version="2.0.0",
 )
 
-
-# ============================================================
+# ---------------------------------------------------------
 # CORS
-# ============================================================
+# ---------------------------------------------------------
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://127.0.0.1:5500",
-        "http://localhost:5500"
+        "http://localhost:5500",
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-
-# ============================================================
-# PAYMENT REQUEST MODEL
-# ============================================================
+# ---------------------------------------------------------
+# Payment Request
+# ---------------------------------------------------------
 
 class PaymentRequest(BaseModel):
-
     payment_id: str
     sender: str
     receiver: str
-    amount: float
-    currency: str
+    amount: float = Field(gt=0)
+    currency: str = "INR"
 
-    new_device: bool
-    new_beneficiary: bool
+    new_device: bool = False
+    new_beneficiary: bool = False
+    velocity: int = Field(default=1, ge=0)
 
-    velocity: int
-    behavior_anomaly: int
-    network_risk: int
+    behavior_anomaly: int = Field(default=0, ge=0, le=100)
+    network_risk: int = Field(default=0, ge=0, le=100)
 
 
-# ============================================================
-# ROOT ENDPOINT
-# ============================================================
+# ---------------------------------------------------------
+# Financial Inclusion Request
+# ---------------------------------------------------------
+
+class FinancialInclusionRequest(BaseModel):
+    transaction_consistency: float = Field(ge=0, le=100)
+    payment_regularity: float = Field(ge=0, le=100)
+    account_activity: float = Field(ge=0, le=100)
+    savings_behavior: float = Field(ge=0, le=100)
+    successful_transactions: float = Field(ge=0, le=100)
+    account_age_months: int = Field(ge=0)
+
+
+# ---------------------------------------------------------
+# Root
+# ---------------------------------------------------------
 
 @app.get("/")
 def root():
-
     return {
-        "message": "FinShield 360 API is running",
-        "version": "1.0.0",
-        "services": [
+        "project": "FinShield 360",
+        "description": (
+            "AI-Powered Financial Trust, Security & "
+            "Intelligence Infrastructure"
+        ),
+        "version": "2.0.0",
+        "features": [
+            "Real-Time Payment Security",
             "Rule-Based Risk Engine",
             "ML Fraud Detection",
-            "Drunix Blockchain",
-            "Payment Security API"
-        ]
+            "Drunix Blockchain Ledger",
+            "Financial Inclusion Assessment",
+        ],
+        "status": "running",
     }
 
 
-# ============================================================
-# RISK ENDPOINT
-# ============================================================
+# ---------------------------------------------------------
+# Risk Analysis
+# ---------------------------------------------------------
 
 @app.post("/risk")
-def calculate_payment_risk(payment: PaymentRequest):
+def risk_analysis(request: PaymentRequest):
 
-    rule_result = calculate_risk(
-        amount=payment.amount,
-        new_device=payment.new_device,
-        new_beneficiary=payment.new_beneficiary,
-        velocity=payment.velocity,
-        behavior_anomaly=payment.behavior_anomaly,
-        network_risk=payment.network_risk
+    result = calculate_risk(
+        amount=request.amount,
+        new_device=request.new_device,
+        new_beneficiary=request.new_beneficiary,
+        velocity=request.velocity,
+        behavior_anomaly=request.behavior_anomaly,
+        network_risk=request.network_risk,
     )
 
     return {
-        "score": rule_result["riskScore"],
-        "level": rule_result["riskLevel"],
-        "decision": rule_result["decision"],
-        "status": rule_result["status"],
-        "factors": rule_result["factors"]
+        "payment_id": request.payment_id,
+        "risk": result,
     }
 
 
-# ============================================================
-# PAYMENT PROCESSING
-# ============================================================
+# ---------------------------------------------------------
+# Payment Processing
+# ---------------------------------------------------------
 
 @app.post("/payment")
-def process_payment(payment: PaymentRequest):
+def process_payment(request: PaymentRequest):
 
-    # ========================================================
-    # STEP 1 — RULE-BASED RISK ENGINE
-    # ========================================================
+    # -----------------------------------------------------
+    # 1. Rule-based risk engine
+    # -----------------------------------------------------
 
     rule_result = calculate_risk(
-        amount=payment.amount,
-        new_device=payment.new_device,
-        new_beneficiary=payment.new_beneficiary,
-        velocity=payment.velocity,
-        behavior_anomaly=payment.behavior_anomaly,
-        network_risk=payment.network_risk
+        amount=request.amount,
+        new_device=request.new_device,
+        new_beneficiary=request.new_beneficiary,
+        velocity=request.velocity,
+        behavior_anomaly=request.behavior_anomaly,
+        network_risk=request.network_risk,
     )
 
     rule_score = int(rule_result["riskScore"])
 
-
-    # ========================================================
-    # STEP 2 — ML FRAUD DETECTION
-    # ========================================================
+    # -----------------------------------------------------
+    # 2. ML fraud detection
+    # -----------------------------------------------------
 
     ml_result = predict_fraud(
-        amount=payment.amount,
-        new_device=payment.new_device,
-        new_beneficiary=payment.new_beneficiary,
-        velocity=payment.velocity,
-        behavior_anomaly=payment.behavior_anomaly,
-        network_risk=payment.network_risk
+        amount=request.amount,
+        new_device=request.new_device,
+        new_beneficiary=request.new_beneficiary,
+        velocity=request.velocity,
+        behavior_anomaly=request.behavior_anomaly,
+        network_risk=request.network_risk,
     )
 
-    fraud_score = int(round(ml_result["fraud_score"]))
+    fraud_score = int(
+        ml_result.get("fraud_score", 0)
+    )
 
+    fraud_score = max(
+        0,
+        min(fraud_score, 100)
+    )
 
-    # ========================================================
-    # STEP 3 — WEIGHTED COMBINED SCORE
-    #
-    # Rule Engine = 60%
-    # ML Model    = 40%
-    # ========================================================
+    prediction = ml_result.get(
+        "prediction",
+        "UNKNOWN"
+    )
+
+    # -----------------------------------------------------
+    # 3. Combined score
+    # -----------------------------------------------------
 
     combined_score = round(
-        (0.60 * rule_score) +
-        (0.40 * fraud_score)
+        (0.60 * rule_score)
+        + (0.40 * fraud_score)
     )
 
-    combined_score = min(combined_score, 100)
-
-
-    # ========================================================
-    # STEP 4 — DECISION-DRIVING SCORE
+    # -----------------------------------------------------
+    # 4. Final security decision
     #
-    # We don't want a strong security signal to disappear
-    # because it is averaged with a weaker signal.
-    #
-    # Example:
-    # Rule Engine = 33
-    # ML          = 5
-    # Combined    = 22
-    #
-    # Decision-driving score = 33
-    # ========================================================
+    # Strongest signal is used.
+    # -----------------------------------------------------
 
     decision_score = max(
         rule_score,
         fraud_score
     )
-
-    decision_score = min(
-        decision_score,
-        100
-    )
-
-
-    # ========================================================
-    # STEP 5 — FINAL SECURITY DECISION
-    # ========================================================
 
     if decision_score >= 80:
 
@@ -208,220 +229,174 @@ def process_payment(payment: PaymentRequest):
         final_decision = "APPROVE"
         final_status = "COMPLETED"
 
-
-    # ========================================================
-    # STEP 6 — RECORD PAYMENT ON DRUNIX
-    #
-    # IMPORTANT:
-    # Drunix stores the decision-driving score.
-    # ========================================================
+    # -----------------------------------------------------
+    # 5. Record payment on Drunix
+    # -----------------------------------------------------
 
     drunix_result = create_payment(
-        payment_id=payment.payment_id,
-        sender=payment.sender,
-        receiver=payment.receiver,
-        amount=payment.amount,
-        currency=payment.currency,
+        payment_id=request.payment_id,
+        sender=request.sender,
+        receiver=request.receiver,
+        amount=request.amount,
+        currency=request.currency,
         risk_score=decision_score,
         risk_level=final_level,
         decision=final_decision,
-        status=final_status
+        status=final_status,
     )
 
-
-    # ========================================================
-    # STEP 7 — HANDLE DRUNIX ERROR
-    # ========================================================
-
-    if drunix_result["return_code"] != 0:
-
-        error_message = (
-            drunix_result.get("stderr")
-            or drunix_result.get("stdout")
-            or "Unknown Drunix transaction error"
-        )
+    if drunix_result.get("return_code", 0) != 0:
 
         raise HTTPException(
             status_code=500,
             detail={
-                "message": "Drunix transaction failed",
-                "error": error_message
-            }
+                "message": (
+                    "Payment risk analysis succeeded, "
+                    "but Drunix recording failed."
+                ),
+                "drunix": drunix_result,
+            },
         )
 
-
-    # ========================================================
-    # STEP 8 — FINAL API RESPONSE
-    # ========================================================
+    # -----------------------------------------------------
+    # 6. Response
+    # -----------------------------------------------------
 
     return {
-
         "message": "Payment processed successfully",
 
-
-        # ----------------------------------------------------
-        # PAYMENT INFORMATION
-        # ----------------------------------------------------
-
         "payment": {
-
-            "payment_id": payment.payment_id,
-
-            "sender": payment.sender,
-
-            "receiver": payment.receiver,
-
-            "amount": payment.amount,
-
-            "currency": payment.currency
-
+            "payment_id": request.payment_id,
+            "sender": request.sender,
+            "receiver": request.receiver,
+            "amount": request.amount,
+            "currency": request.currency,
         },
-
-
-        # ----------------------------------------------------
-        # RULE ENGINE RESULT
-        # ----------------------------------------------------
 
         "rule_engine": {
-
             "score": rule_score,
-
             "level": rule_result["riskLevel"],
-
             "decision": rule_result["decision"],
-
             "status": rule_result["status"],
-
-            "factors": rule_result["factors"]
-
+            "factors": rule_result["factors"],
         },
-
-
-        # ----------------------------------------------------
-        # ML FRAUD DETECTION RESULT
-        # ----------------------------------------------------
 
         "ml_fraud_detection": {
-
             "fraud_score": fraud_score,
-
-            "prediction": ml_result["prediction"]
-
+            "prediction": prediction,
         },
-
-
-        # ----------------------------------------------------
-        # WEIGHTED COMBINED SCORE
-        # ----------------------------------------------------
 
         "combined_score": {
-
             "score": combined_score,
-
             "rule_weight": "60%",
-
-            "ml_weight": "40%"
-
+            "ml_weight": "40%",
         },
 
-
-        # ----------------------------------------------------
-        # FINAL SECURITY DECISION
-        # ----------------------------------------------------
-
         "final_risk": {
-
             "score": decision_score,
-
             "level": final_level,
-
             "decision": final_decision,
-
             "status": final_status,
-
             "highest_signal_score": decision_score,
-
             "explanation": (
                 "The final security decision uses the strongest "
                 "risk signal from the rule engine and ML fraud detector."
-            )
-
+            ),
         },
 
-
-        # ----------------------------------------------------
-        # DRUNIX BLOCKCHAIN
-        # ----------------------------------------------------
-
         "drunix": {
-
             "recorded": True,
-
-            "result": (
-                drunix_result.get("stdout", "").strip()
-            )
-
-        }
-
+            "result": drunix_result.get("stdout", ""),
+        },
     }
 
 
-# ============================================================
-# GET ALL PAYMENTS FROM DRUNIX
-# ============================================================
+# ---------------------------------------------------------
+# FINANCIAL INCLUSION
+# ---------------------------------------------------------
+
+@app.post("/financial-inclusion")
+def financial_inclusion(
+    request: FinancialInclusionRequest
+):
+
+    result = calculate_inclusion_score(
+        transaction_consistency=request.transaction_consistency,
+        payment_regularity=request.payment_regularity,
+        account_activity=request.account_activity,
+        savings_behavior=request.savings_behavior,
+        successful_transactions=request.successful_transactions,
+        account_age_months=request.account_age_months,
+    )
+
+    return {
+        "message": "Financial inclusion assessment completed",
+
+        "assessment": result,
+
+        "profile": {
+            "transaction_consistency": request.transaction_consistency,
+            "payment_regularity": request.payment_regularity,
+            "account_activity": request.account_activity,
+            "savings_behavior": request.savings_behavior,
+            "successful_transactions": request.successful_transactions,
+            "account_age_months": request.account_age_months,
+        },
+    }
+
+
+# ---------------------------------------------------------
+# Get All Payments
+# ---------------------------------------------------------
 
 @app.get("/payments")
 def payments():
 
     result = get_all_payments()
 
-
-    # --------------------------------------------------------
-    # HANDLE QUERY ERROR
-    # --------------------------------------------------------
-
-    if result["return_code"] != 0:
-
-        error_message = (
-            result.get("stderr")
-            or result.get("stdout")
-            or "Unable to retrieve payments"
-        )
+    if result.get("return_code", 0) != 0:
 
         raise HTTPException(
             status_code=500,
             detail={
-                "message": "Unable to retrieve payments from Drunix",
-                "error": error_message
-            }
+                "message": "Unable to query Drunix payments",
+                "error": result.get("stderr", ""),
+            },
         )
 
+    raw_output = result.get("stdout", "").strip()
 
-    # --------------------------------------------------------
-    # PARSE BLOCKCHAIN RESPONSE
-    # --------------------------------------------------------
+    if not raw_output:
+        return []
 
     try:
+        return json.loads(raw_output)
 
-        import json
+    except json.JSONDecodeError:
 
-        payment_data = json.loads(
-            result["stdout"]
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "message": "Invalid JSON returned by Drunix",
+                "raw_output": raw_output,
+            },
         )
 
-    except Exception:
 
-        payment_data = []
+# ---------------------------------------------------------
+# Health Check
+# ---------------------------------------------------------
 
-
-    # --------------------------------------------------------
-    # RETURN HISTORY
-    # --------------------------------------------------------
+@app.get("/health")
+def health():
 
     return {
-
-        "count": len(payment_data),
-
-        "payments": payment_data
-
+        "status": "healthy",
+        "service": "FinShield 360 API",
+        "components": {
+            "risk_engine": "active",
+            "ml_fraud_detection": "active",
+            "financial_inclusion": "active",
+            "drunix": "connected",
+        },
     }
