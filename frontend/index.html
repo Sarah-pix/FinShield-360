@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinShield 360</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #172033;
+        }
+
+        .header {
+            background: #111827;
+            color: white;
+            padding: 22px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        .header-right {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1400px;
+            margin: 30px auto;
+        }
+
+        .hero {
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: #64748b;
+        }
+
+        /* STATISTICS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .stat-title {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .stat-number {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        /* MAIN GRID */
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        /* FORM */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #475569;
+        }
+
+        input,
+        select {
+            padding: 12px;
+            border: 1px solid #dbe2ea;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #38bdf8;
+        }
+
+        .checkbox-row {
+            display: flex;
+            gap: 20px;
+            margin-top: 5px;
+        }
+
+        .checkbox-row label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-weight: normal;
+        }
+
+        .checkbox-row input {
+            width: auto;
+        }
+
+        button {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 13px 20px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 18px;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .refresh-btn {
+            width: auto;
+            margin-top: 0;
+            padding: 9px 15px;
+        }
+
+        /* ARCHITECTURE */
+
+        .architecture {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .architecture-box {
+            flex: 1;
+            text-align: center;
+            padding: 18px 10px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+        }
+
+        .architecture-box strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .arrow {
+            font-size: 22px;
+            color: #64748b;
+        }
+
+        /* RESULT */
+
+        #result {
+            display: none;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .risk-badge {
+            padding: 9px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .low {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .medium {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .high {
+            background: #ffedd5;
+            color: #9a3412;
+        }
+
+        .critical {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .score-container {
+            text-align: center;
+            margin: 20px 0 25px;
+        }
+
+        .score {
+            font-size: 58px;
+            font-weight: bold;
+        }
+
+        .score-label {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .risk-bar {
+            width: 100%;
+            height: 14px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+
+        #riskBar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .analysis-box {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .analysis-box .title {
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .analysis-box .value {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* EXPLANATION */
+
+        .explanation {
+            margin-top: 20px;
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 10px;
+        }
+
+        .explanation h3 {
+            margin-bottom: 10px;
+        }
+
+        .factor {
+            display: flex;
+            justify-content: space-between;
+            padding: 7px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+
+        .factor:last-child {
+            border-bottom: none;
+        }
+
+        /* DRUNIX */
+
+        .drunix-status {
+            margin-top: 18px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #ecfdf5;
+            color: #065f46;
+            font-weight: bold;
+        }
+
+        /* HISTORY */
+
+        .history-card {
+            margin-bottom: 30px;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #475569;
+            text-align: left;
+            padding: 13px;
+        }
+
+        td {
+            padding: 13px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .status {
+            font-weight: bold;
+        }
+
+        .status-approved {
+            color: #15803d;
+        }
+
+        .status-pending {
+            color: #b45309;
+        }
+
+        .status-blocked {
+            color: #dc2626;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #64748b;
+        }
+
+        @media (max-width: 900px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .architecture {
+                flex-direction: column;
+            }
+
+            .arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">FinShield <span>360</span></div>
+    <div class="header-right">
+        AI-Powered Financial Trust & Security
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="hero">
+        <h1>Financial Security Dashboard</h1>
+        <p>Real-time payment risk analysis powered by AI, rule-based intelligence and Drunix blockchain.</p>
+    </div>
+
+    <!-- STATISTICS -->
+
+    <div class="stats">
+
+        <div class="stat-card">
+            <div class="stat-title">Total Transactions</div>
+            <div class="stat-number" id="totalTransactions">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-title">Approved</div>
+            <div class="stat-number" id="approvedTransactions">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-title">Pending</div>
+            <div class="stat-number" id="pendingTransactions">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-title">Blocked</div>
+            <div class="stat-number" id="blockedTransactions">0</div>
+        </div>
+
+    </div>
+
+    <!-- MAIN -->
+
+    <div class="main-grid">
+
+        <!-- PAYMENT FORM -->
+
+        <div class="card">
+
+            <h2>🔐 Analyze Payment</h2>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Payment ID</label>
+                    <input id="paymentId" placeholder="FS-DEMO-001">
+                </div>
+
+                <div class="form-group">
+                    <label>Amount (INR)</label>
+                    <input id="amount" type="number" placeholder="50000">
+                </div>
+
+                <div class="form-group">
+                    <label>Sender</label>
+                    <input id="sender" placeholder="USER001">
+                </div>
+
+                <div class="form-group">
+                    <label>Receiver</label>
+                    <input id="receiver" placeholder="MERCHANT001">
+                </div>
+
+                <div class="form-group">
+                    <label>Velocity</label>
+                    <input id="velocity" type="number" value="0">
+                </div>
+
+                <div class="form-group">
+                    <label>Behavior Anomaly</label>
+                    <input id="behaviorAnomaly" type="number" value="0">
+                </div>
+
+                <div class="form-group">
+                    <label>Network Risk</label>
+                    <input id="networkRisk" type="number" value="0">
+                </div>
+
+                <div class="form-group">
+                    <label>Currency</label>
+                    <input id="currency" value="INR">
+                </div>
+
+                <div class="form-group full">
+
+                    <label>Security Signals</label>
+
+                    <div class="checkbox-row">
+
+                        <label>
+                            <input type="checkbox" id="newDevice">
+                            New Device
+                        </label>
+
+                        <label>
+                            <input type="checkbox" id="newBeneficiary">
+                            New Beneficiary
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button onclick="analyzePayment()">
+                Analyze & Secure Payment
+            </button>
+
+        </div>
+
+
+        <!-- ARCHITECTURE -->
+
+        <div class="card">
+
+            <h2>🛡️ Security Architecture</h2>
+
+            <div class="architecture">
+
+                <div class="architecture-box">
+                    <strong>Payment</strong>
+                    Transaction
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="architecture-box">
+                    <strong>Rule Engine</strong>
+                    Risk Analysis
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="architecture-box">
+                    <strong>AI/ML</strong>
+                    Fraud Detection
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="architecture-box">
+                    <strong>Drunix</strong>
+                    Immutable Record
+                </div>
+
+            </div>
+
+            <div class="explanation">
+
+                <h3>How FinShield Works</h3>
+
+                <div class="factor">
+                    <span>1. Payment received</span>
+                    <strong>Real-Time</strong>
+                </div>
+
+                <div class="factor">
+                    <span>2. Rule-based risk analysis</span>
+                    <strong>Risk Score</strong>
+                </div>
+
+                <div class="factor">
+                    <span>3. ML fraud detection</span>
+                    <strong>Fraud Score</strong>
+                </div>
+
+                <div class="factor">
+                    <span>4. Final security decision</span>
+                    <strong>Approve / Verify / Block</strong>
+                </div>
+
+                <div class="factor">
+                    <span>5. Blockchain recording</span>
+                    <strong>Drunix</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RESULT -->
+
+    <div class="card" id="result">
+
+        <div class="result-header">
+
+            <h2>Security Analysis Result</h2>
+
+            <div id="riskBadge" class="risk-badge">
+                LOW
+            </div>
+
+        </div>
+
+        <div class="score-container">
+
+            <div class="score" id="finalScore">
+                0
+            </div>
+
+            <div class="score-label">
+                Decision-Driving Risk Score
+            </div>
+
+            <div class="risk-bar">
+                <div id="riskBar"></div>
+            </div>
+
+        </div>
+
+
+        <div class="analysis-grid">
+
+            <div class="analysis-box">
+                <div class="title">Rule Engine Score</div>
+                <div class="value" id="ruleScore">0</div>
+            </div>
+
+            <div class="analysis-box">
+                <div class="title">ML Fraud Score</div>
+                <div class="value" id="mlScore">0</div>
+            </div>
+
+            <div class="analysis-box">
+                <div class="title">Combined Score</div>
+                <div class="value" id="combinedScore">0</div>
+            </div>
+
+            <div class="analysis-box">
+                <div class="title">Decision</div>
+                <div class="value" id="decision">-</div>
+            </div>
+
+            <div class="analysis-box">
+                <div class="title">Status</div>
+                <div class="value" id="paymentStatus">-</div>
+            </div>
+
+            <div class="analysis-box">
+                <div class="title">ML Prediction</div>
+                <div class="value" id="mlPrediction">-</div>
+            </div>
+
+        </div>
+
+
+        <!-- WHY FLAGGED -->
+
+        <div class="explanation">
+
+            <h3>🔎 Why was this payment flagged?</h3>
+
+            <div id="riskFactors">
+                No risk factors detected.
+            </div>
+
+        </div>
+
+
+        <div class="drunix-status" id="drunixStatus">
+            ⛓️ Drunix transaction status will appear here.
+        </div>
+
+    </div>
+
+
+    <!-- HISTORY -->
+
+    <div class="card history-card">
+
+        <div class="history-header">
+
+            <h2>⛓️ Drunix Transaction History</h2>
+
+            <button class="refresh-btn" onclick="loadHistory()">
+                Refresh History
+            </button>
+
+        </div>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Payment ID</th>
+                        <th>Sender</th>
+                        <th>Receiver</th>
+                        <th>Amount</th>
+                        <th>Risk Score</th>
+                        <th>Risk Level</th>
+                        <th>Decision</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="historyBody">
+
+                    <tr>
+                        <td colspan="8" class="loading">
+                            Loading transactions...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const API = "http://127.0.0.1:8000";
+
+
+async function analyzePayment() {
+
+    const paymentId = document.getElementById("paymentId").value.trim();
+    const amount = Number(document.getElementById("amount").value);
+    const sender = document.getElementById("sender").value.trim();
+    const receiver = document.getElementById("receiver").value.trim();
+
+    const velocity = Number(document.getElementById("velocity").value || 0);
+    const behaviorAnomaly = Number(document.getElementById("behaviorAnomaly").value || 0);
+    const networkRisk = Number(document.getElementById("networkRisk").value || 0);
+
+    const newDevice = document.getElementById("newDevice").checked;
+    const newBeneficiary = document.getElementById("newBeneficiary").checked;
+
+    if (!paymentId || !amount || !sender || !receiver) {
+
+        alert("Please fill Payment ID, Amount, Sender and Receiver.");
+
+        return;
+    }
+
+
+    const resultBox = document.getElementById("result");
+
+    resultBox.style.display = "block";
+
+    document.getElementById("finalScore").innerText = "...";
+    document.getElementById("decision").innerText = "Analyzing...";
+    document.getElementById("drunixStatus").innerText = "⏳ Processing payment and recording on Drunix...";
+
+
+    try {
+
+        const response = await fetch(`${API}/payment`, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                payment_id: paymentId,
+                sender: sender,
+                receiver: receiver,
+                amount: amount,
+                currency: document.getElementById("currency").value,
+
+                new_device: newDevice,
+                new_beneficiary: newBeneficiary,
+
+                velocity: velocity,
+                behavior_anomaly: behaviorAnomaly,
+                network_risk: networkRisk
+
+            })
+
+        });
+
+
+        const data = await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.detail || "Payment processing failed."
+            );
+
+        }
+
+
+        displayResult(data);
+
+        await loadHistory();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert("Error: " + error.message);
+
+        document.getElementById("drunixStatus").innerText =
+            "❌ Payment processing failed.";
+
+    }
+
+}
+
+
+function displayResult(data) {
+
+    const finalRisk = data.final_risk || {};
+
+    const rule = data.rule_engine || {};
+
+    const ml = data.ml_fraud_detection || {};
+
+    const combined = data.combined_score || {};
+
+
+    const score = Number(
+        finalRisk.score ?? 0
+    );
+
+
+    document.getElementById("finalScore").innerText =
+        score;
+
+
+    document.getElementById("ruleScore").innerText =
+        rule.score ?? 0;
+
+
+    document.getElementById("mlScore").innerText =
+        ml.fraud_score ?? 0;
+
+
+    document.getElementById("combinedScore").innerText =
+        combined.score ?? score;
+
+
+    document.getElementById("decision").innerText =
+        finalRisk.decision ?? "-";
+
+
+    document.getElementById("paymentStatus").innerText =
+        finalRisk.status ?? "-";
+
+
+    document.getElementById("mlPrediction").innerText =
+        ml.prediction ?? "-";
+
+
+    const level =
+        (finalRisk.level || "LOW").toUpperCase();
+
+
+    const badge =
+        document.getElementById("riskBadge");
+
+
+    badge.innerText = level;
+
+    badge.className =
+        "risk-badge " + level.toLowerCase();
+
+
+    const bar =
+        document.getElementById("riskBar");
+
+
+    bar.style.width =
+        Math.min(score, 100) + "%";
+
+
+    /*
+       Explain risk factors
+    */
+
+    const factors =
+        rule.factors || {};
+
+
+    const factorContainer =
+        document.getElementById("riskFactors");
+
+
+    const factorNames = {
+
+        amount_risk: "Amount Risk",
+
+        new_device: "New Device",
+
+        new_beneficiary: "New Beneficiary",
+
+        velocity_risk: "Transaction Velocity",
+
+        behavior_anomaly: "Behavior Anomaly",
+
+        network_risk: "Network Risk"
+
+    };
+
+
+    const factorEntries =
+        Object.entries(factors)
+        .filter(([key, value]) => Number(value) > 0);
+
+
+    if (factorEntries.length === 0) {
+
+        factorContainer.innerHTML =
+            '<div class="factor"><span>No significant risk factors detected</span><strong>✓</strong></div>';
+
+    }
+
+    else {
+
+        factorContainer.innerHTML =
+            factorEntries.map(([key, value]) => {
+
+                return `
+                    <div class="factor">
+                        <span>${factorNames[key] || key}</span>
+                        <strong>+${value}</strong>
+                    </div>
+                `;
+
+            }).join("");
+
+    }
+
+
+    /*
+       Drunix status
+    */
+
+    if (data.drunix && data.drunix.recorded) {
+
+        document.getElementById("drunixStatus").innerText =
+            "⛓️ ✓ Payment successfully recorded on Drunix blockchain.";
+
+    }
+
+    else {
+
+        document.getElementById("drunixStatus").innerText =
+            "⚠️ Payment analyzed, but Drunix recording needs verification.";
+
+    }
+
+}
+
+
+async function loadHistory() {
+
+    const body =
+        document.getElementById("historyBody");
+
+
+    body.innerHTML = `
+        <tr>
+            <td colspan="8" class="loading">
+                Loading transactions...
+            </td>
+        </tr>
+    `;
+
+
+    try {
+
+        const response =
+            await fetch(`${API}/payments`);
+
+
+        const data =
+            await response.json();
+
+
+        const payments =
+            data.payments || [];
+
+
+        updateStatistics(payments);
+
+
+        if (payments.length === 0) {
+
+            body.innerHTML = `
+                <tr>
+                    <td colspan="8" class="empty">
+                        No transactions recorded yet.
+                    </td>
+                </tr>
+            `;
+
+            return;
+        }
+
+
+        body.innerHTML =
+            payments.map(payment => {
+
+                const status =
+                    payment.status || "-";
+
+
+                let statusClass = "";
+
+
+                if (status === "COMPLETED") {
+
+                    statusClass =
+                        "status-approved";
+
+                }
+
+                else if (status === "PENDING") {
+
+                    statusClass =
+                        "status-pending";
+
+                }
+
+                else if (status === "BLOCKED") {
+
+                    statusClass =
+                        "status-blocked";
+
+                }
+
+
+                return `
+
+                    <tr>
+
+                        <td><strong>${payment.paymentId}</strong></td>
+
+                        <td>${payment.sender}</td>
+
+                        <td>${payment.receiver}</td>
+
+                        <td>₹${Number(payment.amount).toLocaleString()}</td>
+
+                        <td>${payment.riskScore}</td>
+
+                        <td>${payment.riskLevel}</td>
+
+                        <td>${payment.decision}</td>
+
+                        <td class="status ${statusClass}">
+                            ${status}
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }).join("");
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        body.innerHTML = `
+            <tr>
+                <td colspan="8" class="empty">
+                    Could not load transaction history.
+                </td>
+            </tr>
+        `;
+
+    }
+
+}
+
+
+function updateStatistics(payments) {
+
+    const total =
+        payments.length;
+
+
+    const approved =
+        payments.filter(
+            p => p.status === "COMPLETED"
+        ).length;
+
+
+    const pending =
+        payments.filter(
+            p => p.status === "PENDING"
+        ).length;
+
+
+    const blocked =
+        payments.filter(
+            p => p.status === "BLOCKED"
+        ).length;
+
+
+    document.getElementById(
+        "totalTransactions"
+    ).innerText = total;
+
+
+    document.getElementById(
+        "approvedTransactions"
+    ).innerText = approved;
+
+
+    document.getElementById(
+        "pendingTransactions"
+    ).innerText = pending;
+
+
+    document.getElementById(
+        "blockedTransactions"
+    ).innerText = blocked;
+
+}
+
+
+/*
+   Automatically load Drunix history
+   when dashboard opens.
+*/
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadHistory
+);
+
+</script>
+
+</body>
+</html>
